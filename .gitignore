@@ -1,6 +1,24 @@
-﻿node_modules
-.next
+﻿# Dependencies
+node_modules/
+
+# Next.js
+.next/
+out/
+
+# Environment variables
 .env
-.vercel
-dist
-build
+.env.local
+
+# Logs
+*.log
+
+# Build files
+dist/
+build/
+
+# IDE
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
