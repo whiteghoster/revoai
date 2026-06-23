@@ -25,7 +25,7 @@ export function CTASection() {
   if (!mounted) return null;
 
   return (
-    <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-testid="cta-section">
+    <div className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12" data-testid="cta-section">
       {/* Container with exactly 32px matching corner radius and drop shadow */}
       <section className="relative overflow-hidden rounded-[32px] py-20 md:py-24 px-6 sm:px-12 lg:px-20 text-center shadow-lg">
 
@@ -58,7 +58,7 @@ export function CTASection() {
               {/* Left Button: Transparent with fine white outline */}
               <button
                 onClick={handleNavigate}
-                className="w-full sm:w-auto h-11 px-6 text-[13px] font-medium rounded-full text-white border border-white/40 transition-all bg-transparent hover:bg-white/10 active:scale-95 cursor-pointer"
+                className="w-full sm:w-auto h-11 px-6 text-[14px] font-medium rounded-full text-white border border-white/40 transition-all bg-transparent hover:bg-white/10 active:scale-95 shadow-md cursor-pointer"
                 data-testid="button-cta-get-started"
               >
                 {t('landing.cta.button', 'Get Started For Free')}
@@ -66,7 +66,7 @@ export function CTASection() {
 
               {/* Right Button: Clean crisp solid white pill */}
               <button
-                className="w-full sm:w-auto h-11 px-8 text-[13px] font-medium rounded-full text-slate-900 bg-white transition-all hover:bg-white/90 active:scale-95 shadow-md cursor-pointer"
+                className="w-full sm:w-auto h-11 px-8 text-[14px] font-medium rounded-full text-slate-900 bg-white transition-all hover:bg-white/90 active:scale-95 "
                 data-testid="button-cta-talk-sales"
               >
                 {t('landing.cta.talkSales', 'Talk to Sales')}
@@ -75,7 +75,7 @@ export function CTASection() {
 
             {/* Footer Trust Indicators with dot separators */}
             <div
-              className="pt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[11px] text-white/80 font-normal tracking-wide"
+              className="pt-6 flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[14px] text-white/80 font-normal tracking-wide"
               data-testid="cta-trust-message"
             >
               <span>{t('landing.cta.noCard', 'No credit card required')}</span>
