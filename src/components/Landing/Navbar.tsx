@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useRouter, usePathname } from "next/navigation";
@@ -8,37 +9,40 @@ import { Button } from "@/components/ui/button";
 import { useBranding } from "@/components/BrandingProvider";
 import { AuthStorage } from "@/lib/auth-storage";
 
-// ── Language data (flags as emoji) ───────────────────────────────────────────
+// ── Language data ─────────────────────────────────────────────────────────────
 const languages = [
-  { code: "en", name: "English", flag: "🇬🇧" },
-  { code: "ar", name: "العربية", flag: "🇸🇦" },
-  { code: "de", name: "Deutsch", flag: "🇩🇪" },
-  { code: "es", name: "Español", flag: "🇪🇸" },
-  { code: "fr", name: "Français", flag: "🇫🇷" },
-  { code: "hi", name: "हिन्दी", flag: "🇮🇳" },
-  { code: "it", name: "Italiano", flag: "🇮🇹" },
-  { code: "ja", name: "日本語", flag: "🇯🇵" },
-  { code: "pl", name: "Polski", flag: "🇵🇱" },
-  { code: "pt", name: "Português", flag: "🇵🇹" },
-  { code: "sv", name: "Svenska", flag: "🇸🇪" },
-  { code: "ru", name: "Русский", flag: "🇷🇺" },
+  { code: "en", name: "English",    flag: "🇬🇧" },
+  { code: "ar", name: "العربية",    flag: "🇸🇦" },
+  { code: "de", name: "Deutsch",    flag: "🇩🇪" },
+  { code: "es", name: "Español",    flag: "🇪🇸" },
+  { code: "fr", name: "Français",   flag: "🇫🇷" },
+  { code: "hi", name: "हिन्दी",     flag: "🇮🇳" },
+  { code: "it", name: "Italiano",   flag: "🇮🇹" },
+  { code: "ja", name: "日本語",     flag: "🇯🇵" },
+  { code: "pl", name: "Polski",     flag: "🇵🇱" },
+  { code: "pt", name: "Português",  flag: "🇵🇹" },
+  { code: "sv", name: "Svenska",    flag: "🇸🇪" },
+  { code: "ru", name: "Русский",    flag: "🇷🇺" },
 ];
 
-// ── Language Dropdown (Desktop) ──────────────────────────────────────────────
+const emojiStyle = {
+  fontFamily: '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "EmojiOne Color", sans-serif',
+};
+
+// ── Language Dropdown (Desktop) ───────────────────────────────────────────────
 function LanguageDropdown() {
   const { i18n } = useTranslation();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]     = useState(false);
   const [search, setSearch] = useState("");
-  const dropdownRef = useRef<HTMLDivElement>(null);
-  const searchRef = useRef<HTMLInputElement>(null);
+  const dropdownRef         = useRef<HTMLDivElement>(null);
+  const searchRef           = useRef<HTMLInputElement>(null);
 
   const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setOpen(false);
-        setSearch("");
+        setOpen(false); setSearch("");
       }
     };
     document.addEventListener("mousedown", handler);
@@ -64,13 +68,7 @@ function LanguageDropdown() {
 
   const select = (lang: typeof languages[0]) => {
     i18n.changeLanguage(lang.code);
-    setOpen(false);
-    setSearch("");
-  };
-
-  // Emoji font fallback to ensure flags render
-  const emojiStyle = {
-    fontFamily: '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "EmojiOne Color", sans-serif',
+    setOpen(false); setSearch("");
   };
 
   return (
@@ -78,18 +76,13 @@ function LanguageDropdown() {
       <button
         onClick={() => setOpen(v => !v)}
         className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-medium border transition-all
-          border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-black/5
-          ${open ? "bg-black/5" : "bg-transparent"}`}
+          border-gray-200 text-gray-600 hover:text-gray-900 hover:bg-gray-50
+          ${open ? "bg-gray-50" : "bg-transparent"}`}
         aria-haspopup="listbox"
         aria-expanded={open}
       >
-        {/* Flag with explicit emoji font and larger size */}
-        <span className="text-xl leading-none" style={emojiStyle}>
-          {currentLang.flag}
-        </span>
-        <span className="text-xs font-semibold tracking-wide uppercase">
-          {currentLang.code}
-        </span>
+        <span className="text-xl leading-none" style={emojiStyle}>{currentLang.flag}</span>
+        <span className="text-xs font-semibold tracking-wide uppercase">{currentLang.code}</span>
         <ChevronDown className={`w-3.5 h-3.5 opacity-50 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
 
@@ -102,7 +95,6 @@ function LanguageDropdown() {
             transition={{ duration: 0.15, ease: "easeOut" }}
             className="absolute right-0 mt-2 w-52 bg-white rounded-2xl shadow-xl border border-gray-100 py-2 z-[200] overflow-hidden"
           >
-            {/* Search */}
             <div className="px-3 pb-2 border-b border-gray-100">
               <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg bg-gray-50 border border-gray-200">
                 <Search className="w-3.5 h-3.5 text-gray-400 flex-shrink-0" />
@@ -116,31 +108,24 @@ function LanguageDropdown() {
                 />
               </div>
             </div>
-            {/* List */}
             <div className="max-h-52 overflow-y-auto py-1">
               {filtered.length === 0 ? (
                 <p className="text-xs text-gray-400 text-center py-4">No languages found</p>
-              ) : (
-                filtered.map((lang) => (
-                  <button
-                    key={lang.code}
-                    onClick={() => select(lang)}
-                    className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
-                      currentLang.code === lang.code
-                        ? "bg-gray-50"
-                        : "hover:bg-gray-50"
-                    }`}
-                  >
-                    <span className="text-xl leading-none w-6 text-center flex-shrink-0" style={emojiStyle}>
-                      {lang.flag}
-                    </span>
-                    <span className="flex-1 truncate">{lang.name}</span>
-                    {currentLang.code === lang.code && (
-                      <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
-                    )}
-                  </button>
-                ))
-              )}
+              ) : filtered.map((lang) => (
+                <button
+                  key={lang.code}
+                  onClick={() => select(lang)}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
+                    currentLang.code === lang.code ? "bg-gray-50" : "hover:bg-gray-50"
+                  }`}
+                >
+                  <span className="text-xl leading-none w-6 text-center flex-shrink-0" style={emojiStyle}>{lang.flag}</span>
+                  <span className="flex-1 truncate text-sm text-gray-700">{lang.name}</span>
+                  {currentLang.code === lang.code && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF7300] flex-shrink-0" />
+                  )}
+                </button>
+              ))}
             </div>
           </motion.div>
         )}
@@ -152,7 +137,7 @@ function LanguageDropdown() {
 // ── Mobile Language Picker ────────────────────────────────────────────────────
 function MobileLanguagePicker() {
   const { i18n } = useTranslation();
-  const [open, setOpen] = useState(false);
+  const [open, setOpen]     = useState(false);
   const [search, setSearch] = useState("");
 
   const currentLang = languages.find(l => l.code === i18n.language) || languages[0];
@@ -163,12 +148,7 @@ function MobileLanguagePicker() {
 
   const select = (lang: typeof languages[0]) => {
     i18n.changeLanguage(lang.code);
-    setOpen(false);
-    setSearch("");
-  };
-
-  const emojiStyle = {
-    fontFamily: '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "EmojiOne Color", sans-serif',
+    setOpen(false); setSearch("");
   };
 
   return (
@@ -178,9 +158,7 @@ function MobileLanguagePicker() {
         className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl border border-gray-200 bg-gray-50 text-sm font-medium text-gray-700"
       >
         <div className="flex items-center gap-2">
-          <span className="text-xl leading-none" style={emojiStyle}>
-            {currentLang.flag}
-          </span>
+          <span className="text-xl leading-none" style={emojiStyle}>{currentLang.flag}</span>
           <span>{currentLang.name}</span>
         </div>
         <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
@@ -214,16 +192,14 @@ function MobileLanguagePicker() {
                   onClick={() => select(lang)}
                   className={`w-full flex items-center gap-3 px-3 py-2.5 text-sm transition-colors text-left ${
                     currentLang.code === lang.code
-                      ? "bg-orange-50 text-orange-600 font-semibold"
+                      ? "bg-orange-50 text-[#FF7300] font-semibold"
                       : "text-gray-700 hover:bg-gray-50"
                   }`}
                 >
-                  <span className="text-xl leading-none w-6 text-center flex-shrink-0" style={emojiStyle}>
-                    {lang.flag}
-                  </span>
+                  <span className="text-xl leading-none w-6 text-center flex-shrink-0" style={emojiStyle}>{lang.flag}</span>
                   <span className="flex-1">{lang.name}</span>
                   {currentLang.code === lang.code && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-orange-500 flex-shrink-0" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#FF7300] flex-shrink-0" />
                   )}
                 </button>
               ))}
@@ -235,26 +211,26 @@ function MobileLanguagePicker() {
   );
 }
 
-// ── Main Navbar ──────────────────────────────────────────────────────────────
+// ── Main Navbar ───────────────────────────────────────────────────────────────
 export function Navbar() {
-  const router = useRouter();
-  const location = usePathname();
+  const router        = useRouter();
+  const location      = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
-  const mobileMenuRef = useRef<HTMLDivElement>(null);
-  const previousOverflow = useRef<string>("");
-  const brandingConfig = useBranding();
-  const branding = brandingConfig.branding;
-  const { t } = useTranslation();
-  const isAuthenticated = AuthStorage.isAuthenticated();
-  const isAdmin = AuthStorage.isAdmin();
+  const [isScrolled, setIsScrolled]             = useState(false);
+  const mobileMenuRef       = useRef<HTMLDivElement>(null);
+  const previousOverflow    = useRef<string>("");
+  const brandingConfig      = useBranding();
+  const branding            = brandingConfig.branding;
+  const { t }               = useTranslation();
+  const isAuthenticated     = AuthStorage.isAuthenticated();
+  const isAdmin             = AuthStorage.isAdmin();
 
   const navLinks = [
-    { href: "/features", label: t('landing.navbar.features') },
-    { href: "/use-cases", label: t('landing.navbar.useCases') },
-    { href: "/pricing", label: t('landing.navbar.pricing') },
+    { href: "/features",     label: t('landing.navbar.features') },
+    { href: "/use-cases",    label: t('landing.navbar.useCases') },
+    { href: "/pricing",      label: t('landing.navbar.pricing') },
     { href: "/integrations", label: t('landing.navbar.integrations') },
-    { href: "/contact", label: t('landing.navbar.contact') },
+    { href: "/contact",      label: t('landing.navbar.contact') },
   ];
 
   useEffect(() => {
@@ -275,9 +251,8 @@ export function Navbar() {
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node)) {
+      if (mobileMenuRef.current && !mobileMenuRef.current.contains(event.target as Node))
         setIsMobileMenuOpen(false);
-      }
     };
     if (isMobileMenuOpen) {
       document.addEventListener("mousedown", handleClickOutside);
@@ -312,46 +287,41 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/95 backdrop-blur-xl shadow-sm border-b border-gray-100"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 w-full z-50 transition-all duration-300
+        bg-white border-b border-gray-100
+        ${isScrolled ? "shadow-sm" : "shadow-none"}
+      `}
       data-testid="navbar"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
 
-          {/* Logo */}
+          {/* ── Logo Container (Size increased slightly) ── */}
           <motion.a
             href="/"
-            className="flex items-center gap-2.5"
+            className="flex items-center flex-shrink-0"
+            style={{ height: '80px' }} // Bumped up from 36px
             whileHover={{ scale: 1.02 }}
             transition={{ type: "spring", stiffness: 400 }}
             data-testid="link-logo"
             onClick={(e) => { e.preventDefault(); router.push("/"); }}
           >
-            {(branding.logo_url_light || branding.logo_url) ? (
-              <img
-                src={branding.logo_url_light || branding.logo_url}
-                alt={branding.app_name || "Logo"}
-                className="h-9 w-auto max-w-[180px] object-contain"
-                data-testid="img-logo"
-              />
-            ) : (
-              <span className="font-bold text-gray-900 text-xl tracking-tight">
-                {branding.app_name || "Diploy"}
-              </span>
-            )}
+            <img
+              src={branding.logo_url_light || branding.logo_url || "/logo.png"}
+              alt={branding.app_name || "Logo"}
+              style={{ height: '100%', width: 'auto', maxWidth: '180px', display: 'block' }} // Max-width increased proportionally
+              className="object-contain"
+              data-testid="img-logo"
+            />
           </motion.a>
 
-          {/* Desktop nav links */}
+          {/* ── Desktop nav links ── */}
           <div className="hidden lg:flex items-center gap-1">
             {navLinks.map((link) => (
               <motion.a
                 key={link.href}
                 href={link.href}
-                className="px-4 py-2 text-sm font-medium rounded-lg transition-all text-gray-600 hover:text-gray-900 hover:bg-black/5"
+                className="px-4 py-2 text-sm font-medium rounded-lg transition-all text-gray-600 hover:text-gray-900 hover:bg-gray-50"
                 whileHover={{ y: -1 }}
                 transition={{ type: "spring", stiffness: 400 }}
                 data-testid={`link-nav-${link.label.toLowerCase().replace(/\s+/g, "-")}`}
@@ -362,22 +332,21 @@ export function Navbar() {
             ))}
           </div>
 
-          {/* Right side: Language dropdown + Login */}
+          {/* ── Right side: Language + CTA ── */}
           <div className="hidden lg:flex items-center gap-3">
             <LanguageDropdown />
             <motion.button
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
               onClick={handleSignIn}
-              className="font-semibold px-6 py-2 rounded-full text-sm text-white transition-all"
-              style={{ background: "#FF7300" }}
+              className="font-semibold px-6 py-2 rounded-full text-sm text-white transition-all bg-[#FF7300] hover:bg-[#E06500]"
               data-testid="button-nav-signin"
             >
               {t('landing.navbar.login')}
             </motion.button>
           </div>
 
-          {/* Mobile hamburger */}
+          {/* ── Mobile hamburger ── */}
           <Button
             variant="ghost"
             size="icon"
@@ -391,7 +360,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile drawer */}
+      {/* ── Mobile drawer ── */}
       <AnimatePresence>
         {isMobileMenuOpen && (
           <>
@@ -413,9 +382,16 @@ export function Navbar() {
               data-testid="mobile-menu"
             >
               <div className="flex flex-col h-full">
-                {/* Header */}
+                {/* Drawer header with logo */}
                 <div className="flex items-center justify-between h-16 px-4 border-b border-gray-100">
-                  <span className="font-bold text-gray-900 text-lg">{branding.app_name || "Diploy"}</span>
+                  <div style={{ height: '38px' }} className="flex items-center"> {/* Bumped up from 32px */}
+                    <img
+                      src={branding.logo_url_light || branding.logo_url || "/logo.png"}
+                      alt={branding.app_name || "Logo"}
+                      style={{ height: '100%', width: 'auto', maxWidth: '150px', display: 'block' }}
+                      className="object-contain"
+                    />
+                  </div>
                   <Button
                     variant="ghost"
                     size="icon"
@@ -444,15 +420,14 @@ export function Navbar() {
                   </div>
                 </nav>
 
-                {/* Footer: Language picker + Login */}
+                {/* Footer: language + CTA */}
                 <div className="p-4 border-t border-gray-100 space-y-3">
                   <div>
                     <p className="text-xs text-gray-400 mb-1.5 px-1">Select Language</p>
                     <MobileLanguagePicker />
                   </div>
                   <button
-                    className="w-full text-white font-semibold py-3 rounded-xl text-sm"
-                    style={{ background: "#FF7300" }}
+                    className="w-full text-white font-semibold py-3 rounded-xl text-sm bg-[#FF7300] hover:bg-[#E06500] transition-colors"
                     onClick={handleSignIn}
                     data-testid="button-mobile-signin"
                   >

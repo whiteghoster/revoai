@@ -28,7 +28,7 @@ export function ContactSection() {
   return (
     /* The main section container background blends green to peach exactly like image_bdaaad.png */
     <section className="relative w-full bg-gradient-to-br from-[#f2faf5] via-[#fcfbfa] to-[#fff3e9] py-20 px-4 sm:px-6 lg:px-8 font-sans overflow-hidden">
-      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center relative z-10">
+      <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 relative z-10">
         
         {/* Left Side: Content & Trust Indicators */}
         <div className="space-y-5">
@@ -36,7 +36,7 @@ export function ContactSection() {
             {t("contact.badge", "GET IN TOUCH")}
           </div>
           
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-[1.1]">
+          <h2 className="text-4xl sm:text-4xl max-w-sm font-bold text-slate-900 tracking-tight leading-[1.1]">
             {t("contact.title", "Ready to Transform Your Calls?")}
           </h2>
           

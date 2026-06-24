@@ -94,7 +94,6 @@ function PlanCard({ plan, yearly, delay }: { plan: PlanProps; yearly: boolean; d
         <p className="text-xs text-gray-600 leading-relaxed mb-4 max-w-xs">{plan.description}</p>
       )}
 
-      {/* Pricing block updated to use font-semibold */}
       <div className="flex items-end gap-1 mb-8">
         <span className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">${price}</span>
         <span className="text-xs text-gray-500 font-medium pb-1.5">
@@ -102,7 +101,6 @@ function PlanCard({ plan, yearly, delay }: { plan: PlanProps; yearly: boolean; d
         </span>
       </div>
 
-      {/* Feature item checklist */}
       <ul className="space-y-3.5 mb-8 flex-1">
         {plan.features.map((feature, idx) => (
           <li key={idx} className="flex items-start gap-3">
@@ -117,7 +115,6 @@ function PlanCard({ plan, yearly, delay }: { plan: PlanProps; yearly: boolean; d
         ))}
       </ul>
 
-      {/* CTA Button */}
       <Link href="/login" className="w-full">
         <motion.button
           whileHover={{ scale: 1.01 }}
@@ -165,9 +162,9 @@ export function PricingSection() {
           <div 
             onClick={() => setYearly((v) => !v)}
             className="inline-flex items-center gap-3 px-4 py-2 cursor-pointer transition-all select-none"
-            style={{ backgroundColor: "#EFEBE8", borderRadius: "9999px" }}
+            style={{ backgroundColor: "#efebe8", borderRadius: "9999px" }}
           >
-            <span className={`text-[11px] font-bold tracking-wide transition-colors ${!yearly ? "text-[#008A1A]" : "text-gray-400"}`}>
+            <span className={`text-[11px] tracking-wide font-bold transition-colors ${!yearly ? "text-[#008A1A]" : "text-gray-400"}`}>
               Monthly
             </span>
             <button
@@ -175,7 +172,10 @@ export function PricingSection() {
               role="switch"
               aria-checked={yearly}
               className="relative inline-flex h-5 w-9 items-center transition-colors"
-              style={{ background: "#008A1A", borderRadius: "9999px" }}
+              style={{ 
+                background: yearly ? "#185323" : "#C4BDBA", 
+                borderRadius: "9999px" 
+              }}
               data-testid="toggle-billing-period"
             >
               <span
