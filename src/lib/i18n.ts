@@ -37,12 +37,12 @@ const resources = {
           description:
             "Your AI voice agent doesn't just talk — it takes action. Connect it to the tools your business already runs on.",
           cards: {
-            sms: "Send SMS Follow-ups",
-            transfer: "Transfer to a Human",
-            webhooks: "Trigger Webhooks",
-            email: "Send Email Summaries",
-            whatsapp: "Message on WhatsApp",
-            appointments: "Book Appointments",
+            sms: "Send SMS messages to customers immediately during phone calls",
+            transfer: "Redirect or transfer calls to a live human agent",
+            webhooks: "Collect customer data & automate actions using Zapier and Webhooks",
+            email: "Send emails effortlessly during or after a call",
+            whatsapp: "Send WhatsApp messages to customers during phone calls",
+            appointments: "Schedule appointments and send calendar invites during the call",
           },
           getStarted: "Get Started Free",
           freeTrial: "Free 14-day trial",

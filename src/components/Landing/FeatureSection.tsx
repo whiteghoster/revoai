@@ -39,7 +39,8 @@ const CapabilityBadge = ({ text, delay }: { text: string; delay: number }) => (
 const VoiceAgentMockup = () => {
   return (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-white border border-orange-100 shadow-[0_0_25px_rgba(251,146,60,0.08)] rounded-2xl p-6 space-y-4">
+      {/* Exact Match: Warm ambient orange shadow glow + light orange border */}
+      <div className="relative bg-white border border-orange-100 shadow-[0_15px_35px_rgba(255,122,0,0.07),0_5px_15px_rgba(255,122,0,0.03)] rounded-2xl p-6 space-y-4">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-1 px-2.5 py-1 bg-gray-50 border border-gray-200 rounded-lg text-xs text-gray-600">
             <span>English (Singapore)</span>
@@ -100,7 +101,8 @@ const VoiceAgentMockup = () => {
 const CallSchedulerMockup = () => {
   return (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-white border border-orange-100 shadow-[0_0_25px_rgba(251,146,60,0.08)] rounded-2xl p-6 space-y-3">
+      {/* Exact Match: Warm ambient orange shadow glow + light orange border */}
+      <div className="relative bg-white border border-orange-100 shadow-[0_15px_35px_rgba(255,122,0,0.07),0_5px_15px_rgba(255,122,0,0.03)] rounded-2xl p-6 space-y-3">
         <div className="flex items-center gap-2 px-3 py-1.5 bg-slate-500 text-white rounded-md w-fit text-xs font-medium">
           <User className="w-3.5 h-3.5" />
           <span>Select Agent</span>
@@ -133,7 +135,8 @@ const CallSchedulerMockup = () => {
 const ConversionMockup = () => {
   return (
     <div className="relative w-full max-w-md mx-auto">
-      <div className="relative bg-white border border-orange-100 shadow-[0_0_25px_rgba(251,146,60,0.08)] rounded-2xl p-6 space-y-4">
+      {/* Exact Match: Warm ambient orange shadow glow + light orange border */}
+      <div className="relative bg-white border border-orange-100 shadow-[0_15px_35px_rgba(255,122,0,0.07),0_5px_15px_rgba(255,122,0,0.03)] rounded-2xl p-6 space-y-4">
         <div className="flex justify-center">
           <div className="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center shadow-md">
             <svg className="w-5 h-5 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -179,10 +182,13 @@ const FeatureCard = ({ title, description, bullets, mockup, imagePosition }: Fea
   const isLeft = imagePosition === "left";
 
   return (
-    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
       <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
-        <div className={isLeft ? "order-2" : "order-2 md:order-1"}>
-          <div className="space-y-4">
+        
+        {/* Text Container Card Layout */}
+        <div className={`${isLeft ? "order-2" : "order-2 md:order-1"}`}>
+          {/* Exact Match: Smooth neutral grey shadow + clean gray border wrapper */}
+          <div className="bg-white border border-gray-100 shadow-[0_12px_30px_rgba(0,0,0,0.03),0_4px_12px_rgba(0,0,0,0.015)] rounded-2xl p-6 sm:p-10 space-y-4">
             <h3 className="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight">{title}</h3>
             <p className="text-gray-500 text-sm leading-relaxed max-w-md">{description}</p>
 
@@ -199,6 +205,7 @@ const FeatureCard = ({ title, description, bullets, mockup, imagePosition }: Fea
           </div>
         </div>
 
+        {/* Mockup Graphic Container */}
         <div className={isLeft ? "order-1" : "order-1 md:order-2"}>
           {mockup}
         </div>
@@ -215,8 +222,8 @@ export function FeatureSection() {
   return (
     <section ref={ref} className="bg-white py-16 font-sans">
       {/* Header Container */}
-      <div className="max-w-3xl mx-auto px-4 text-center mb-16">
-        <h2 className="text-5xl font-extrabold text-gray-900 tracking-tight mb-2">
+      <div className="max-w-3xl mx-auto px-4 text-center mb-12 sm:mb-16">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight mb-2">
           Automate Your <span className="text-orange-500">Growth</span>
         </h2>
         <p className="text-gray-500 text-sm font-medium mb-6">
@@ -232,7 +239,7 @@ export function FeatureSection() {
       </div>
 
       {/* Feature Blocks arranged alternating like the template image */}
-      <div className="space-y-4 ">
+      <div className="space-y-6">
         <FeatureCard 
           title={t('landing.featureSection.feature1.title', 'Human-like Voice Agents')}
           description={t('landing.featureSection.feature1.description', 'Easily create your AI agent by giving your agent a name, selecting its language, accent, and set it up to handle tasks:')}
