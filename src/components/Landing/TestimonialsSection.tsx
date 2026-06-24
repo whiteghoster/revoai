@@ -90,7 +90,7 @@ export function TestimonialsSection() {
               data-testid={`testimonial-card-${idx}`}
             >
               <StarRating count={testimonial.rating} />
-              <p className="text-sm text-gray-600 mb-5 leading-relaxed" data-testid={`testimonial-quote-${idx}`}>
+              <p className="text-sm text-black mb-5 leading-relaxed italic" style={{ color: "#000000" }} data-testid={`testimonial-quote-${idx}`}>
                 "{testimonial.quote}{testimonial.highlight ? ` ${testimonial.highlight}` : ""}"
               </p>
               <div className="flex items-center gap-3">
@@ -104,7 +104,7 @@ export function TestimonialsSection() {
                   <div className="font-semibold text-sm text-gray-900" data-testid={`testimonial-author-${idx}`}>
                     {testimonial.author}
                   </div>
-                  <div className="text-xs text-muted-foreground" data-testid={`testimonial-role-${idx}`}>
+                  <div className="text-xs text-muted-foreground" style={{ color: "#000000" }} data-testid={`testimonial-role-${idx}`}>
                     {testimonial.role}, {testimonial.company}
                   </div>
                 </div>
