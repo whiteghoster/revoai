@@ -62,7 +62,7 @@ export function TestimonialsSection() {
   const allTestimonials = getTestimonials();
 
   return (
-    <section id="testimonials" className="py-20 md:py-28" style={{ background: "#FFF8F5" }} data-testid="testimonials-section">
+    <section id="testimonials" className="py-20 md:py-28" style={{ background: "#ffffff" }} data-testid="testimonials-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2

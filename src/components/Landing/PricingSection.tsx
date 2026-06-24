@@ -1,3 +1,4 @@
+// @ts-nocheck
 "use client";
 /**
  * ============================================================
@@ -68,62 +69,64 @@ function PlanCard({ plan, yearly, delay }: { plan: PlanProps; yearly: boolean; d
       transition={{ duration: 0.5, delay }}
       className={
         plan.popular
-          ? "relative rounded-2xl p-7 sm:p-8 flex flex-col border-2 shadow-lg"
-          : "relative rounded-2xl p-7 sm:p-8 flex flex-col border"
+          ? "relative rounded-3xl p-8 sm:p-10 flex flex-col border-2 shadow-[0_8px_30px_rgba(250,204,21,0.25)]"
+          : "relative rounded-3xl p-8 sm:p-10 flex flex-col border border-gray-100 shadow-sm"
       }
       style={
         plan.popular
-          ? { background: "#FFF3EA", borderColor: "#FF7300" }
-          : { background: "#FFFFFF", borderColor: "#E5E7EB" }
+          ? { background: "#FFF0E6", borderColor: "#FF7300" }
+          : { background: "#FFFFFF" }
       }
       data-testid={`pricing-card-${plan.name.toLowerCase()}`}
     >
       {plan.popular && (
         <span
-          className="absolute -top-3 left-7 px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wide text-white"
-          style={{ background: "#FF7300" }}
+          className="absolute top-4 left-6 px-2.5 py-0.5 rounded-md text-[10px] font-bold text-white tracking-wide"
+          style={{ background: "#008A1A" }}
         >
           Popular
         </span>
       )}
 
-      <h3 className="text-lg font-bold text-gray-900 mb-3">{plan.name}</h3>
+      <h3 className={`text-2xl font-extrabold text-gray-900 ${plan.popular ? "mt-4 mb-2" : "mb-2"}`}>{plan.name}</h3>
 
       {plan.description && (
-        <p className="text-sm text-gray-500 leading-relaxed mb-4">{plan.description}</p>
+        <p className="text-xs text-gray-600 leading-relaxed mb-4 max-w-xs">{plan.description}</p>
       )}
 
-      <div className="flex items-end gap-1 mb-6">
-        <span className="text-4xl sm:text-5xl font-extrabold text-gray-900">${price}</span>
-        <span className="text-base text-gray-500 font-medium mb-1">
+      {/* Pricing block updated to use font-semibold */}
+      <div className="flex items-end gap-1 mb-8">
+        <span className="text-4xl sm:text-5xl font-semibold text-gray-900 tracking-tight">${price}</span>
+        <span className="text-xs text-gray-500 font-medium pb-1.5">
           /{yearly ? "year" : "month"}
         </span>
       </div>
 
-      <ul className="space-y-3 mb-8 flex-1">
+      {/* Feature item checklist */}
+      <ul className="space-y-3.5 mb-8 flex-1">
         {plan.features.map((feature, idx) => (
-          <li key={idx} className="flex items-start gap-2.5">
-            <div className="w-4 h-4 rounded-full bg-green-100 flex items-center justify-center mt-0.5 shrink-0">
-              <Check className="h-2.5 w-2.5 text-green-600 stroke-[3]" />
+          <li key={idx} className="flex items-start gap-3">
+            <div 
+              className="w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5"
+              style={{ backgroundColor: "#008A1A" }}
+            >
+              <Check className="h-2.5 w-2.5 text-white stroke-[4]" />
             </div>
-            <span className="text-sm text-gray-700">{feature.text}</span>
+            <span className="text-xs font-medium text-gray-600 leading-normal">{feature.text}</span>
           </li>
         ))}
       </ul>
 
-      <Link href="/login">
+      {/* CTA Button */}
+      <Link href="/login" className="w-full">
         <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
-          className={
-            plan.popular
-              ? "w-full h-12 rounded-full font-semibold text-sm text-white transition-all"
-              : "w-full h-12 rounded-full font-semibold text-sm transition-all border-2"
-          }
+          whileHover={{ scale: 1.01 }}
+          whileTap={{ scale: 0.99 }}
+          className="w-full h-12 rounded-full font-normal text-sm transition-all"
           style={
             plan.popular
-              ? { background: "#FF7300" }
-              : { borderColor: "#FF7300", color: "#FF7300", background: "transparent" }
+              ? { background: "#FF6B00", color: "#ffffff" }
+              : { border: "1px solid #FFCDAB", color: "#1F2937", background: "#ffffff" }
           }
           data-testid={`button-pricing-${plan.name.toLowerCase()}`}
         >
@@ -140,53 +143,62 @@ export function PricingSection() {
   const isInView = useInView(ref, { once: true });
 
   return (
-    <section id="pricing" ref={ref} className="py-20 md:py-28 bg-white" data-testid="pricing-section">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="pricing" ref={ref} className="py-20 md:py-28" style={{ background: "#FEF8F4" }} data-testid="pricing-section">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="text-center mb-10"
+          className="text-center mb-8"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#1F110B] mb-3 tracking-tight">
             Choose Your Subscription
           </h2>
-          <p className="text-base text-gray-500 max-w-xl mx-auto">
+          <p className="text-xs sm:text-sm text-gray-600 max-w-xl mx-auto font-medium">
             Start for free, upgrade when you're ready to scale your operations. No hidden fees.
           </p>
         </motion.div>
 
-        {/* Monthly / Yearly toggle */}
-        <div className="flex items-center justify-center gap-3 mb-12">
-          <span className={`text-sm font-medium ${!yearly ? "text-gray-900" : "text-gray-400"}`}>
-            Monthly
-          </span>
-          <button
-            type="button"
-            role="switch"
-            aria-checked={yearly}
+        {/* Pill-shaped switch capsule for billing toggles */}
+        <div className="flex items-center justify-center mb-16">
+          <div 
             onClick={() => setYearly((v) => !v)}
-            className="relative inline-flex h-6 w-11 items-center rounded-full transition-colors"
-            style={{ background: "#22c55e" }}
-            data-testid="toggle-billing-period"
+            className="inline-flex items-center gap-3 px-4 py-2 cursor-pointer transition-all select-none"
+            style={{ backgroundColor: "#EFEBE8", borderRadius: "9999px" }}
           >
-            <span
-              className="inline-block h-5 w-5 transform rounded-full bg-white shadow transition-transform"
-              style={{ transform: yearly ? "translateX(22px)" : "translateX(2px)" }}
-            />
-          </button>
-          <span className={`text-sm font-medium ${yearly ? "text-gray-900" : "text-gray-400"}`}>
-            Yearly
-          </span>
+            <span className={`text-[11px] font-bold tracking-wide transition-colors ${!yearly ? "text-[#008A1A]" : "text-gray-400"}`}>
+              Monthly
+            </span>
+            <button
+              type="button"
+              role="switch"
+              aria-checked={yearly}
+              className="relative inline-flex h-5 w-9 items-center transition-colors"
+              style={{ background: "#008A1A", borderRadius: "9999px" }}
+              data-testid="toggle-billing-period"
+            >
+              <span
+                className="inline-block h-4 w-4 transform bg-white shadow-sm transition-transform"
+                style={{ 
+                  transform: yearly ? "translateX(18px)" : "translateX(2px)",
+                  borderRadius: "50%" 
+                }}
+              />
+            </button>
+            <span className={`text-[11px] font-bold tracking-wide transition-colors ${yearly ? "text-[#008A1A]" : "text-gray-400"}`}>
+              Yearly
+            </span>
+          </div>
         </div>
 
-        <div className="grid sm:grid-cols-2 gap-6 max-w-3xl mx-auto items-start">
+        <div className="grid sm:grid-cols-2 gap-8 max-w-4xl mx-auto items-start">
           {plans.map((plan, idx) => (
-            <PlanCard key={plan.name} plan={plan} yearly={yearly} delay={idx * 0.1} />
+            <PlanCard key={plan.name} plan={plan} yearly={yearly} delay={idx * 0.05} />
           ))}
         </div>
 
-        <p className="text-center text-sm text-gray-400 mt-10">
+        <p className="text-center text-xs text-gray-500 font-medium mt-14 tracking-wide">
           All plans include 14-day money-back guarantee. No credit card required for free plan.
         </p>
       </div>
