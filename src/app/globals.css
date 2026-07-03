@@ -1,0 +1,486 @@
+@import "tailwindcss";
+
+/* ────────────────────────────────────────────────────────────
+   Tailwind v4 design tokens — RevoAI Theme
+──────────────────────────────────────────────────────────── */
+@theme {
+  /* Fonts */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', 'Noto Nastaliq Urdu', sans-serif;
+
+  /* RevoAI Brand Colors */
+  --color-brand:        #FF7300;
+  --color-brand-dark:   #E66500;
+  --color-brand-light:  #FFD4B3;
+  --color-success:      #22c55e;
+  --color-hero:         #FFF8F5;
+  --color-section:      #F7EEE7;
+
+  /* Navy palette (dark sections) */
+  --color-navy-900: #0c1a2d;
+  --color-navy-800: #132338;
+  --color-navy-700: #1a2f4a;
+
+  /* Semantic surface */
+  --color-background:           #FFFFFF;
+  --color-foreground:           #1c1917;
+  --color-card:                 #FFFFFF;
+  --color-card-foreground:      #1c1917;
+  --color-muted:                #faf7f4;
+  --color-muted-foreground:     #78716c;
+  --color-popover:              #FFFFFF;
+  --color-popover-foreground:   #1c1917;
+  --color-primary:              #1c1917;
+  --color-primary-foreground:   #fafaf9;
+  --color-secondary:            #f5f5f4;
+  --color-secondary-foreground: #1c1917;
+  --color-accent:               #fff3ed;
+  --color-accent-foreground:    #FF7300;
+  --color-destructive:          #ef4444;
+  --color-destructive-foreground: #fafaf9;
+  --color-border:               #e7e5e4;
+  --color-input:                #e7e5e4;
+  --color-ring:                 #FF7300;
+}
+
+/* ────────────────────────────────────────────────────────────
+   HSL CSS vars for shadcn/ui compatibility
+──────────────────────────────────────────────────────────── */
+:root {
+  --background:              0 0% 100%;
+  --foreground:              20 14.3% 4.1%;
+  --card:                    0 0% 100%;
+  --card-foreground:         20 14.3% 4.1%;
+  --popover:                 0 0% 100%;
+  --popover-foreground:      20 14.3% 4.1%;
+  --primary:                 24 9.8% 10%;
+  --primary-foreground:      60 9.1% 97.8%;
+  --secondary:               60 4.8% 95.9%;
+  --secondary-foreground:    24 9.8% 10%;
+  --muted:                   30 20% 97%;
+  --muted-foreground:        30 6% 47%;
+  --accent:                  25 100% 97%;
+  --accent-foreground:       25 100% 45%;
+  --destructive:             0 84.2% 60.2%;
+  --destructive-foreground:  60 9.1% 97.8%;
+  --border:                  20 10% 90%;
+  --input:                   20 10% 90%;
+  --ring:                    25 100% 48%;
+  --brand:                   25 100% 48%;
+  --radius:                  0.75rem;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Semantic utility classes (bridges hsl vars → Tailwind)
+──────────────────────────────────────────────────────────── */
+.bg-background   { background-color: hsl(var(--background)); }
+.bg-card         { background-color: hsl(var(--card)); }
+.bg-muted        { background-color: hsl(var(--muted)); }
+.bg-primary      { background-color: hsl(var(--primary)); }
+.bg-secondary    { background-color: hsl(var(--secondary)); }
+.bg-accent       { background-color: hsl(var(--accent)); }
+.bg-destructive  { background-color: hsl(var(--destructive)); }
+.bg-popover      { background-color: hsl(var(--popover)); }
+
+.text-foreground              { color: hsl(var(--foreground)); }
+.text-card-foreground         { color: hsl(var(--card-foreground)); }
+.text-muted-foreground        { color: hsl(var(--muted-foreground)); }
+.text-primary                 { color: hsl(var(--primary)); }
+.text-primary-foreground      { color: hsl(var(--primary-foreground)); }
+.text-secondary-foreground    { color: hsl(var(--secondary-foreground)); }
+.text-accent-foreground       { color: hsl(var(--accent-foreground)); }
+.text-destructive             { color: hsl(var(--destructive)); }
+.text-destructive-foreground  { color: hsl(var(--destructive-foreground)); }
+.text-popover-foreground      { color: hsl(var(--popover-foreground)); }
+
+.border-border   { border-color: hsl(var(--border)); }
+.border-input    { border-color: hsl(var(--input)); }
+.border-primary  { border-color: hsl(var(--primary)); }
+.ring-ring       { --tw-ring-color: hsl(var(--ring)); }
+.ring-primary    { --tw-ring-color: hsl(var(--primary)); }
+
+/* Brand utilities */
+.text-brand   { color: #FF7300; }
+.bg-brand     { background-color: #FF7300; }
+.border-brand { border-color: #FF7300; }
+.ring-brand   { --tw-ring-color: #FF7300; }
+
+/* Brand foreground (text on brand bg) */
+.text-brand-foreground { color: #ffffff; }
+
+/* ────────────────────────────────────────────────────────────
+   Base / Global resets
+──────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-size-adjust: 100%;
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  min-height: 100dvh;
+  overflow-x: hidden;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+
+:focus-visible {
+  outline: 2px solid #FF7300;
+  outline-offset: 2px;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar           { width: 5px; }
+::-webkit-scrollbar-track     { background: transparent; }
+::-webkit-scrollbar-thumb     { background: hsl(var(--border)); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: hsl(var(--muted-foreground)); }
+
+/* ────────────────────────────────────────────────────────────
+   Hero Section - Warm peach background with matching dot grid
+──────────────────────────────────────────────────────────── */
+.hero-bg {
+  background-color: #ffede0;
+  background-image: radial-gradient(circle, #d4a882 1.2px, transparent 1.2px);
+  background-size: 36px 36px;
+}
+
+/* Hero dots overlay — warm tan dots on #ffede0 base */
+.hero-dots {
+  background-image: radial-gradient(circle, #d4a882 1.2px, transparent 1.2px);
+  background-size: 36px 36px;
+  opacity: 0.45;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Typography
+──────────────────────────────────────────────────────────── */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: hsl(var(--foreground));
+}
+
+p { color: hsl(var(--muted-foreground)); }
+
+/* ────────────────────────────────────────────────────────────
+   Section layout helper
+──────────────────────────────────────────────────────────── */
+.section-px {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+@media (min-width: 480px)  { .section-px { padding-left: 1.5rem;  padding-right: 1.5rem;  } }
+@media (min-width: 640px)  { .section-px { padding-left: 2rem;    padding-right: 2rem;    } }
+@media (min-width: 1024px) { .section-px { padding-left: 3rem;    padding-right: 3rem;    } }
+@media (min-width: 1280px) { .section-px { padding-left: 4rem;    padding-right: 4rem;    } }
+
+/* ────────────────────────────────────────────────────────────
+   Gradient text
+──────────────────────────────────────────────────────────── */
+.text-gradient {
+  background: linear-gradient(135deg, #FF7300 0%, #fb923c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Animations
+──────────────────────────────────────────────────────────── */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes caret-blink {
+  0%, 70%, 100% { opacity: 1; }
+  20%, 50%      { opacity: 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+@keyframes float-l {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-12px) translateX(-4px); }
+}
+
+@keyframes float-r {
+  0%, 100% { transform: translateY(0px) translateX(0px); }
+  50%       { transform: translateY(-8px) translateX(4px); }
+}
+
+.animate-fade-in-up  { animation: fade-in-up 0.6s ease-out forwards; }
+.animate-caret-blink { animation: caret-blink 1.2s ease-out infinite; }
+.animate-float       { animation: float 4s ease-in-out infinite; }
+.animate-float-l     { animation: float-l 4s ease-in-out infinite; }
+.animate-float-r     { animation: float-r 5s ease-in-out infinite 1s; }
+
+/* ────────────────────────────────────────────────────────────
+   Card elevation helper
+──────────────────────────────────────────────────────────── */
+.card-hover, .hover-elevate {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover, .hover-elevate:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 40px -8px rgba(0, 0, 0, 0.12);
+}
+
+/* ────────────────────────────────────────────────────────────
+   Dark sections
+──────────────────────────────────────────────────────────── */
+.bg-navy-900 { background-color: #0c1a2d; color: #f8fafc; }
+.bg-navy-800 { background-color: #132338; color: #f8fafc; }
+.bg-navy-700 { background-color: #1a2f4a; color: #f8fafc; }
+
+.bg-navy-900 h1, .bg-navy-900 h2, .bg-navy-900 h3,
+.bg-navy-800 h1, .bg-navy-800 h2, .bg-navy-800 h3,
+.bg-navy-700 h1, .bg-navy-700 h2, .bg-navy-700 h3 {
+  color: #f8fafc;
+}
+.bg-navy-900 p, .bg-navy-800 p { color: rgba(248, 250, 252, 0.75); }
+
+/* Navy border utilities */
+.border-brand\/10 { border-color: rgba(255, 115, 0, 0.1); }
+.border-brand\/30 { border-color: rgba(255, 115, 0, 0.3); }
+.hover\:border-brand\/30:hover { border-color: rgba(255, 115, 0, 0.3); }
+
+/* ────────────────────────────────────────────────────────────
+   Prose (legal pages)
+──────────────────────────────────────────────────────────── */
+.prose h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  color: hsl(var(--foreground));
+}
+.prose p  { color: hsl(var(--muted-foreground)); line-height: 1.85; }
+.prose a  { color: #FF7300; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ────────────────────────────────────────────────────────────
+   Input & button polish
+──────────────────────────────────────────────────────────── */
+input, textarea, select { font-family: inherit; }
+button { cursor: pointer; font-family: inherit; }
+
+a, button {
+  transition-property: color, background-color, border-color, opacity, box-shadow, transform;
+  transition-duration: 150ms;
+  transition-timing-function: ease;
+}
+
+/* ────────────────────────────────────────────────────────────
+   RevoAI specific - Hero floating bubbles
+──────────────────────────────────────────────────────────── */
+.bubble-green {
+  background: #22c55e;
+  color: white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.3);
+}
+
+.bubble-orange {
+  background: #fff3ed;
+  color: #c2410c;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.375rem 0.875rem;
+  border-radius: 9999px;
+  border: 1px solid #fed7aa;
+  box-shadow: 0 4px 12px rgba(255, 115, 0, 0.12);
+}
+
+/* RevoAI contact section warm gradient */
+.contact-bg {
+  background: linear-gradient(135deg, #f5f0e8 0%, #faf6f0 50%, #fef8f0 100%);
+}
+
+/* RevoAI action cards  */
+.action-card-active-orange {
+  background: #FF7300;
+  color: white;
+}
+.action-card-active-green {
+  background: #16a34a;
+  color: white;
+}
+
+/* ────────────────────────────────────────────────────────────
+   Reduce motion
+──────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float, .animate-float-l, .animate-float-r, .animate-float { animation: none; }
+}
+/* ────────────────────────────────────────────────────────────
+   Landing palette, responsive helpers, icon hover states, RTL
+──────────────────────────────────────────────────────────── */
+:root {
+  --landing-white: #ffffff;
+  --landing-alt: #f6f6ef;
+  --landing-ink: #1E1B18;
+  --landing-muted: #655E56;
+  --landing-orange: #FF7300;
+  --landing-orange-dark: #E66500;
+  --landing-green: #008A1A;
+  --landing-soft-orange: #FFF0E6;
+  --landing-soft-green: #EEF8EA;
+}
+
+.section-white { background: var(--landing-white); }
+.section-alt { background: var(--landing-alt); }
+
+.icon-hover {
+  transition: transform 220ms ease, box-shadow 220ms ease, background-color 220ms ease, color 220ms ease, border-color 220ms ease;
+}
+.icon-hover:hover {
+  transform: translateY(-3px) scale(1.06);
+  box-shadow: 0 14px 28px rgba(255, 115, 0, 0.16);
+}
+
+[dir="rtl"] body { direction: rtl; }
+[dir="rtl"] input,
+[dir="rtl"] textarea { direction: rtl; text-align: right; }
+[dir="rtl"] .force-ltr { direction: ltr; }
+[dir="rtl"] .force-text-left { text-align: left; }
+[dir="rtl"] .rtl-flip-row { flex-direction: row-reverse; }
+[dir="rtl"] .rtl-text-right { text-align: right; }
+[dir="rtl"] .rtl-origin-right { transform-origin: right; }
+
+/* ────────────────────────────────────────────────────────────
+   Premium parallax / overlap motion polish
+──────────────────────────────────────────────────────────── */
+.premium-scroll-shell {
+  will-change: transform;
+  transform-style: preserve-3d;
+}
+
+.landing-page-motion {
+  background: linear-gradient(180deg, #f6f6ef 0%, #ffffff 32%, #f6f6ef 68%, #ffffff 100%);
+  overflow: clip;
+}
+
+.premium-overlap-section {
+  position: relative;
+  border-top-left-radius: clamp(28px, 4vw, 56px);
+  border-top-right-radius: clamp(28px, 4vw, 56px);
+  box-shadow: 0 -28px 80px rgba(30, 27, 24, 0.055);
+  isolation: isolate;
+}
+
+.premium-overlap-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(255, 115, 0, 0.08), transparent 28%),
+    radial-gradient(circle at 88% 18%, rgba(0, 138, 26, 0.065), transparent 24%);
+  opacity: 0.8;
+  z-index: -1;
+}
+
+.premium-card-3d {
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(.16, 1, .3, 1), box-shadow 420ms cubic-bezier(.16, 1, .3, 1), border-color 420ms ease;
+}
+.premium-card-3d:hover {
+  transform: translateY(-10px) rotateX(2deg) rotateY(-2deg);
+  box-shadow: 0 28px 70px rgba(30, 27, 24, 0.13);
+}
+
+.image-reveal-card {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 26px 90px rgba(30, 27, 24, 0.14);
+}
+.image-reveal-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 10%, rgba(255, 255, 255, 0.34) 44%, transparent 68%);
+  transform: translateX(-130%);
+  transition: transform 900ms cubic-bezier(.16, 1, .3, 1);
+  pointer-events: none;
+}
+.image-reveal-card:hover::after {
+  transform: translateX(130%);
+}
+
+.layered-visual-stage {
+  position: relative;
+  min-height: clamp(280px, 42vw, 520px);
+  perspective: 1200px;
+}
+
+.layered-visual-card {
+  position: absolute;
+  border-radius: clamp(22px, 2.8vw, 38px);
+  overflow: hidden;
+  border: 1px solid rgba(230, 226, 216, 0.9);
+  background: white;
+  box-shadow: 0 24px 80px rgba(30, 27, 24, 0.12);
+}
+
+.float-orb {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(0px);
+  pointer-events: none;
+  opacity: 0.9;
+  animation: float 6s ease-in-out infinite;
+}
+
+.auth-input {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid #E6E2D8;
+  background: #f6f6ef;
+  padding: 0.9rem 1rem;
+  color: #1E1B18;
+  font-size: 0.925rem;
+  font-weight: 600;
+  outline: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+.auth-input::placeholder { color: #8C857D; font-weight: 500; }
+.auth-input:focus {
+  border-color: #FF7300;
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(255, 115, 0, 0.12);
+}
+
+@media (max-width: 767px) {
+  .premium-scroll-shell { transform: none !important; }
+  .premium-overlap-section { border-radius: 28px 28px 0 0; }
+  .layered-visual-stage { min-height: 460px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .premium-scroll-shell,
+  .premium-card-3d,
+  .image-reveal-card,
+  .float-orb {
+    animation: none !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
