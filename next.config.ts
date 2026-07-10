@@ -10,7 +10,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
     remotePatterns: [
+<<<<<<< HEAD
       { protocol: "https", hostname: "images.unsplash.com" },
+=======
+>>>>>>> 5d840ee (update ui)
       { protocol: "https", hostname: "**" },
     ],
   },

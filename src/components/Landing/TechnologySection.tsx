@@ -89,8 +89,13 @@ export function TechnologySection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <motion.div
+<<<<<<< HEAD
             initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
+=======
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+>>>>>>> 5d840ee (update ui)
             transition={{ duration: 0.6 }}
           >
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand/10 border border-brand/20 mb-6">
@@ -146,8 +151,13 @@ export function TechnologySection() {
           </motion.div>
 
           <motion.div
+<<<<<<< HEAD
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
+=======
+            initial={{ opacity: 0 }}
+            animate={isInView ? { opacity: 1 } : {}}
+>>>>>>> 5d840ee (update ui)
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid sm:grid-cols-2 gap-2"
           >

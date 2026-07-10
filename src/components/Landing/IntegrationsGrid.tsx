@@ -17,8 +17,13 @@ export function IntegrationsGrid() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-[0.9fr_1.2fr] gap-10 lg:gap-16 items-start">
           <motion.div
+<<<<<<< HEAD
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
+=======
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+>>>>>>> 5d840ee (update ui)
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="lg:sticky lg:top-28"

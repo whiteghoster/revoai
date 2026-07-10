@@ -30,12 +30,21 @@ const animationVariants: Record<ScrollAnimation, Variants> = {
     visible: { opacity: 1, y: 0 },
   },
   "fade-right": {
+<<<<<<< HEAD
     hidden: { opacity: 0, x: -72, y: 12 },
     visible: { opacity: 1, x: 0, y: 0 },
   },
   "fade-left": {
     hidden: { opacity: 0, x: 72, y: 12 },
     visible: { opacity: 1, x: 0, y: 0 },
+=======
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0 },
+  },
+  "fade-left": {
+    hidden: { opacity: 0, y: 12 },
+    visible: { opacity: 1, y: 0 },
+>>>>>>> 5d840ee (update ui)
   },
   "zoom-in": {
     hidden: { opacity: 0, scale: 0.9, y: 34 },

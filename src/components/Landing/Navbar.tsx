@@ -118,9 +118,14 @@ function LanguageDropdown({ mobile = false }: { mobile?: boolean }) {
                 <button
                   key={lang.code}
                   onClick={() => select(lang)}
+<<<<<<< HEAD
                   className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
                     currentLang.code === lang.code ? "bg-[#FFF0E6]" : "hover:bg-[#f6f6ef]"
                   }`}
+=======
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${currentLang.code === lang.code ? "bg-[#FFF0E6]" : "hover:bg-[#f6f6ef]"
+                    }`}
+>>>>>>> 5d840ee (update ui)
                 >
                   <span className="text-xl leading-none w-7 text-center flex-shrink-0" style={emojiStyle}>{lang.flag}</span>
                   <span className="flex-1 min-w-0">
@@ -218,11 +223,19 @@ export function Navbar() {
             data-testid="link-logo"
             onClick={(e) => { e.preventDefault(); router.push("/"); }}
           >
+<<<<<<< HEAD
               <img
     src={branding.logo_url_light || branding.logo_url || "/logo.png"}
     alt={branding.app_name || "Logo"}
     className="max-h-20 w-auto object-contain"
   />
+=======
+            <img
+              src={branding.logo_url_light || branding.logo_url || "/logo.png"}
+              alt={branding.app_name || "Logo"}
+              className="max-h-20 w-auto object-contain"
+            />
+>>>>>>> 5d840ee (update ui)
           </motion.a>
 
           <div className="hidden lg:flex items-center gap-1.5 rounded-full border border-[#E6E2D8] bg-[#f6f6ef]/70 p-1">

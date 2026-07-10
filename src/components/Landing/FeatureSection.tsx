@@ -196,8 +196,13 @@ const FeatureCard = ({ title, description, bullets, mockup, imagePosition }: Fea
               {bullets.map((bullet, index) => (
                 <motion.li
                   key={index}
+<<<<<<< HEAD
                   initial={{ opacity: 0, x: isLeft ? 16 : -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
+=======
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+>>>>>>> 5d840ee (update ui)
                   viewport={{ once: true }}
                   transition={{ duration: 0.42, delay: index * 0.06 }}
                   className="flex items-start gap-2.5"

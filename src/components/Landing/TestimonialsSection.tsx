@@ -1,7 +1,11 @@
 "use client";
 import { Star } from "lucide-react";
+<<<<<<< HEAD
 import { motion, useReducedMotion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+=======
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+>>>>>>> 5d840ee (update ui)
 import { useTranslation } from "react-i18next";
 
 interface Testimonial {
@@ -10,7 +14,10 @@ interface Testimonial {
   author: string;
   role: string;
   company: string;
+<<<<<<< HEAD
   image: string;
+=======
+>>>>>>> 5d840ee (update ui)
   rating: number;
 }
 
@@ -19,6 +26,7 @@ const testimonialKeys = [
   "james", "maria", "rachel", "carlos", "sarah", "david"
 ];
 
+<<<<<<< HEAD
 const testimonialImages: Record<string, string> = {
   jennifer: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
   lisa: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150",
@@ -34,6 +42,8 @@ const testimonialImages: Record<string, string> = {
   david: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150",
 };
 
+=======
+>>>>>>> 5d840ee (update ui)
 function StarRating({ count = 5 }: { count?: number }) {
   return (
     <div className="flex gap-0.5 mb-3" data-testid="star-rating">
@@ -46,7 +56,10 @@ function StarRating({ count = 5 }: { count?: number }) {
 
 export function TestimonialsSection() {
   const { t } = useTranslation();
+<<<<<<< HEAD
   const shouldReduceMotion = useReducedMotion();
+=======
+>>>>>>> 5d840ee (update ui)
 
   const getTestimonials = (): Testimonial[] =>
     testimonialKeys.map(key => ({
@@ -55,7 +68,10 @@ export function TestimonialsSection() {
       author: t(`landing.testimonials.quotes.${key}.author`),
       role: t(`landing.testimonials.quotes.${key}.role`),
       company: t(`landing.testimonials.quotes.${key}.company`),
+<<<<<<< HEAD
       image: testimonialImages[key],
+=======
+>>>>>>> 5d840ee (update ui)
       rating: 5,
     }));
 
@@ -79,6 +95,7 @@ export function TestimonialsSection() {
         {/* 3-column grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mb-8" data-testid="testimonials-grid">
           {allTestimonials.slice(0, 6).map((testimonial, idx) => (
+<<<<<<< HEAD
             <motion.div
               key={idx}
               initial={shouldReduceMotion ? { opacity: 1 } : { opacity: 0, y: 20 }}
@@ -86,6 +103,10 @@ export function TestimonialsSection() {
               transition={{ delay: idx * 0.1 }}
               viewport={{ once: true }}
               whileHover={{ y: -4, transition: { duration: 0.2 } }}
+=======
+            <div
+              key={idx}
+>>>>>>> 5d840ee (update ui)
               className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-200"
               data-testid={`testimonial-card-${idx}`}
             >
@@ -95,7 +116,10 @@ export function TestimonialsSection() {
               </p>
               <div className="flex items-center gap-3">
                 <Avatar className="h-10 w-10">
+<<<<<<< HEAD
                   <AvatarImage src={testimonial.image} alt={testimonial.author} className="object-cover" />
+=======
+>>>>>>> 5d840ee (update ui)
                   <AvatarFallback className="text-xs font-semibold" style={{ background: "#fff3ed", color: "#FF7300" }}>
                     {testimonial.author.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
@@ -109,7 +133,11 @@ export function TestimonialsSection() {
                   </div>
                 </div>
               </div>
+<<<<<<< HEAD
             </motion.div>
+=======
+            </div>
+>>>>>>> 5d840ee (update ui)
           ))}
         </div>
       </div>
@@ -117,4 +145,8 @@ export function TestimonialsSection() {
   );
 }
 
+<<<<<<< HEAD
 export default TestimonialsSection;
+=======
+export default TestimonialsSection;
+>>>>>>> 5d840ee (update ui)

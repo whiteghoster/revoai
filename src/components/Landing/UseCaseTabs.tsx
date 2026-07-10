@@ -454,9 +454,15 @@ export function UseCaseTabs() {
                   id={`agent-grid-${activeTab}`}
                   role="tabpanel"
                   aria-labelledby={`tab-button-${activeTab}`}
+<<<<<<< HEAD
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
+=======
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+>>>>>>> 5d840ee (update ui)
                   transition={{ duration: 0.3, ease: "easeInOut" }}
                   className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8"
                   data-testid={`agent-grid-${activeTab}`}
