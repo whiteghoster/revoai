@@ -9,27 +9,24 @@ import { Button } from "@/components/ui/button";
 import { useBranding } from "@/components/BrandingProvider";
 import { AuthStorage } from "@/lib/auth-storage";
 
+// Clean ISO codes used for reliable vector SVG mapping
 const languages = [
-  { code: "en", name: "English", country: "United Kingdom", flag: "🇬🇧" },
-  { code: "ur", name: "اردو", country: "Pakistan", flag: "🇵🇰" },
-  { code: "ar", name: "العربية", country: "Saudi Arabia", flag: "🇸🇦" },
-  { code: "de", name: "Deutsch", country: "Germany", flag: "🇩🇪" },
-  { code: "es", name: "Español", country: "Spain", flag: "🇪🇸" },
-  { code: "fr", name: "Français", country: "France", flag: "🇫🇷" },
-  { code: "hi", name: "हिन्दी", country: "India", flag: "🇮🇳" },
-  { code: "it", name: "Italiano", country: "Italy", flag: "🇮🇹" },
-  { code: "ja", name: "日本語", country: "Japan", flag: "🇯🇵" },
-  { code: "pl", name: "Polski", country: "Poland", flag: "🇵🇱" },
-  { code: "pt", name: "Português", country: "Portugal", flag: "🇵🇹" },
-  { code: "sv", name: "Svenska", country: "Sweden", flag: "🇸🇪" },
-  { code: "ru", name: "Русский", country: "Russia", flag: "🇷🇺" },
+  { code: "en", name: "English", country: "United Kingdom", flagCode: "gb" },
+  { code: "ur", name: "اردو", country: "Pakistan", flagCode: "pk" },
+  { code: "ar", name: "العربية", country: "Saudi Arabia", flagCode: "sa" },
+  { code: "de", name: "Deutsch", country: "Germany", flagCode: "de" },
+  { code: "es", name: "Español", country: "Spain", flagCode: "es" },
+  { code: "fr", name: "Français", country: "France", flagCode: "fr" },
+  { code: "hi", name: "हिन्दी", country: "India", flagCode: "in" },
+  { code: "it", name: "Italiano", country: "Italy", flagCode: "it" },
+  { code: "ja", name: "日本語", country: "Japan", flagCode: "jp" },
+  { code: "pl", name: "Polski", country: "Poland", flagCode: "pl" },
+  { code: "pt", name: "Português", country: "Portugal", flagCode: "pt" },
+  { code: "sv", name: "Svenska", country: "Sweden", flagCode: "se" },
+  { code: "ru", name: "Русский", country: "Russia", flagCode: "ru" },
 ];
 
-const emojiStyle = {
-  fontFamily: '"Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "EmojiOne Color", sans-serif',
-};
-
-const navPalette = {
+const navPalette: Record<string, { text: string; bg: string; border: string }> = {
   "/features": { text: "#FF7300", bg: "#FFF0E6", border: "#FFD4B3" },
   "/use-cases": { text: "#008A1A", bg: "#EEF8EA", border: "#CDEDCB" },
   "/pricing": { text: "#B45309", bg: "#FFF7ED", border: "#FED7AA" },
@@ -43,6 +40,7 @@ function LanguageDropdown({ mobile = false }: { mobile?: boolean }) {
   const [search, setSearch] = useState("");
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
+  
   const currentLang = languages.find((l) => l.code === i18n.language?.split("-")[0]) || languages[0];
 
   useEffect(() => {
@@ -82,9 +80,16 @@ function LanguageDropdown({ mobile = false }: { mobile?: boolean }) {
         aria-expanded={open}
       >
         <span className="flex items-center gap-2">
-          <span className="text-xl leading-none" style={emojiStyle}>{currentLang.flag}</span>
+          {/* Active Flag Icon */}
+          <span className="w-5 h-3.5 flex items-center justify-center overflow-hidden rounded-sm shadow-sm border border-neutral-200 flex-shrink-0">
+            <img 
+              src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${currentLang.flagCode.toUpperCase()}.svg`}
+              alt={currentLang.country}
+              className="w-full h-full object-cover"
+            />
+          </span>
           <span className="uppercase text-xs tracking-wide force-ltr">{currentLang.code}</span>
-          {mobile && <span className="text-sm normal-case">{currentLang.name}</span>}
+          {mobile && <span className="text-sm normal-case font-normal text-[#655E56] ml-1">{currentLang.name}</span>}
         </span>
         <ChevronDown className={`w-4 h-4 text-[#655E56] transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
       </button>
@@ -118,10 +123,18 @@ function LanguageDropdown({ mobile = false }: { mobile?: boolean }) {
                 <button
                   key={lang.code}
                   onClick={() => select(lang)}
-                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${currentLang.code === lang.code ? "bg-[#FFF0E6]" : "hover:bg-[#f6f6ef]"
-                    }`}
+                  className={`w-full flex items-center gap-3 px-4 py-2.5 text-left transition-colors ${
+                    currentLang.code === lang.code ? "bg-[#FFF0E6]" : "hover:bg-[#f6f6ef]"
+                  }`}
                 >
-                  <span className="text-xl leading-none w-7 text-center flex-shrink-0" style={emojiStyle}>{lang.flag}</span>
+                  {/* Dropdown Menu List Flag Icons */}
+                  <span className="w-5 h-3.5 flex items-center justify-center overflow-hidden rounded-sm shadow-sm border border-neutral-100 flex-shrink-0">
+                    <img 
+                      src={`https://purecatamphetamine.github.io/country-flag-icons/3x2/${lang.flagCode.toUpperCase()}.svg`}
+                      alt={lang.country}
+                      className="w-full h-full object-cover"
+                    />
+                  </span>
                   <span className="flex-1 min-w-0">
                     <span className="block truncate text-sm font-semibold text-[#1E1B18]">{lang.name}</span>
                     <span className="block truncate text-[11px] text-[#655E56]">{lang.country}</span>
@@ -328,14 +341,13 @@ export function Navbar() {
                     })}
                   </div>
 
-                  {/* Moved Language Selector to Scrollable section to keep Bottom Footer compact */}
                   <div className="pt-4 border-t border-[#E6E2D8]">
                     <p className="text-xs text-[#655E56] mb-2 px-1 font-semibold">Select Language</p>
                     <LanguageDropdown mobile />
                   </div>
                 </nav>
 
-                {/* Mobile Drawer Sticky Footer (Strictly for SignIn Action) */}
+                {/* Mobile Drawer Sticky Footer */}
                 <div className="p-4 border-t border-[#E6E2D8] bg-[#f6f6ef] flex-shrink-0">
                   <button
                     className="w-full text-white font-bold py-3.5 rounded-xl text-sm bg-[#FF7300] hover:bg-[#E66500] transition-colors shadow-sm"
